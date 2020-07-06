@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <app-header></app-header>
+      <app-content></app-content>
+      <app-footer></app-footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component("app-header", {
+        template: "<h1>Header</h1>",
+      });
+      Vue.component("app-content", {
+        template: "<p>앱의 컨텐츠입니다.</p>",
+      });
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          message: "hi",
+        },
+        components: {
+          "app-footer": {
+            template: "<div>푸터푸터</div>",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

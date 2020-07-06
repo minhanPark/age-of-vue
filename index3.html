@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <app-header v-bind:propsdata="num"></app-header>
+      <!-- <app-content v-on:받는이벤트="상위컴포넌트의 메소드"></app-content> -->
+      <app-content v-on:pass="deliverNum"></app-content>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var appHeader = {
+        template: "<div>header</div>",
+        props: ["propsdata"],
+      };
+      var appContent = {
+        template: "<div>content<button v-on:click='passNum'>add</button></div>",
+        methods: {
+          passNum: function () {
+            this.$emit("pass", 10);
+          },
+        },
+      };
+      var vm = new Vue({
+        el: "#app",
+        components: {
+          "app-header": appHeader,
+          "app-content": appContent,
+        },
+        data: {
+          num: 0,
+        },
+        methods: {
+          deliverNum: function (value) {
+            // 데이터 값을 조절할 수 있는 메소드를 만들어서 아래로 전달하는 것이 아니라
+            // 아래에서 그냥 이벤트를 발생시키고 위에서 받는 것인가
+            this.num = value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
